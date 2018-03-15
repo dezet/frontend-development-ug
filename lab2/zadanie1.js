@@ -15,17 +15,16 @@ cryptocurrencies.module = (function () {
       pairCollection.push(pair)
     },
     removePair (pair) {
-      var idx = pairCollection.indexOf(pair)
-      console.log(idx)
-      if (idx >= 0) {
-        console.log(pairCollection.splice(idx, 1))
-        pairCollection.splice(idx, 1)
-      }
+      pairCollection.forEach(function (item, index) {
+        if (item.name === pair) pairCollection.splice(index, 1)
+      })
+      console.log(pairCollection)
+
     },
     printPairs () {
-      for (var i = 0; i < pairCollection.length; i++) {
-        printer(pairCollection[i])
-      }
+      pairCollection.forEach(function (elem) {
+        printer(elem)
+      })
     },
     pairExist (pair) {
       return pairCollection.filter(function (elem) {
@@ -52,17 +51,25 @@ cryptocurrencies.module.addPair({
   name: 'USD/ETH',
   price: 30.0
 })
+console.log('Does USD/BTC exist in stock?')
 console.log(cryptocurrencies.module.pairExist('USD/BTC'))
+console.log('Does usd/btc (:)) exist in stock?')
 console.log(cryptocurrencies.module.pairExist('usd/btc'))
+console.log('Does USD/ETH  exist in stock?')
 console.log(cryptocurrencies.module.pairExist('USD/ETH'))
+console.log('Search stock by price')
 console.log(cryptocurrencies.module.findByPrice(30.0))
 
+console.log('Print currently observed pair')
 cryptocurrencies.module.printPairs()
-console.log('---')
+console.log('Removing pair USD/LTC ')
 cryptocurrencies.module.removePair('USD/LTC')
+console.log('Print currently observed pair')
 cryptocurrencies.module.printPairs()
 console.log('---')
+console.log('Removing pair USD/BTC ')
 cryptocurrencies.module.removePair('USD/BTC')
 cryptocurrencies.module.printPairs()
 console.log('---')
+console.log('Removing pair USD/ETH')
 cryptocurrencies.module.removePair('USD/ETH')
