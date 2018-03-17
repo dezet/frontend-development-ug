@@ -1,9 +1,14 @@
 /**
  THIS posiada 4 konteksty wykonania:
  1) Funkcja (zwykły kontekst)
+ - wiaze this globalnie
  2) Konstruktor !!!
+ - wiaze this do obiektu jezeli korzystamy z new,
+ - jezeli nie to wiaze globalnie
  3) Metoda
- 4) Metoda apply
+ - wiaze this do obiektu
+ 4) Metoda apply / call
+ - wiaze this do obiektu przekazanego
  */
 
 /**

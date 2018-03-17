@@ -6,28 +6,34 @@ var cryptocurrencies = {}
 
 cryptocurrencies.module = (function () {
   var pairCollection = []
-
-  var printer = function (what) {
-    console.log('info - (' + what.name + '(' + what.price + ')' + ')')
+  var Pair           = function (name, price) {
+    this.name  = name
+    this.price = price
   }
+
+  Pair.prototype.print = function () {
+    console.log('info - (' + this.name + '(' + this.price + ')' + ')')
+  }
+
   return {
     addPair (pair) {
       pairCollection.push(pair)
     },
     removePair (pair) {
       pairCollection.forEach(function (item, index) {
-        if (item.name === pair) pairCollection.splice(index, 1)
+        if (item.name === pair)
+          return pairCollection.splice(index, 1)
       })
-      console.log(pairCollection)
 
     },
     printPairs () {
-      pairCollection.forEach(function (elem) {
-        printer(elem)
+      pairCollection.map(function (elem) {
+        elem.print()
       })
     },
     pairExist (pair) {
       return pairCollection.filter(function (elem) {
+        console.log(elem)
         return elem.name.toLowerCase() === pair.toLowerCase()
       }).length > 0
     },
@@ -35,22 +41,18 @@ cryptocurrencies.module = (function () {
       return pairCollection.filter(function (elem) {
         return elem.price === price
       })
-    }
+    },
+    Pair
   }
 })()
 
-cryptocurrencies.module.addPair({
-  name: 'USD/BTC',
-  price: 10.0
-})
-cryptocurrencies.module.addPair({
-  name: 'USD/LTC',
-  price: 20.0
-})
-cryptocurrencies.module.addPair({
-  name: 'USD/ETH',
-  price: 30.0
-})
+cryptocurrencies.module.addPair(
+  new cryptocurrencies.module.Pair('USD/BTC', 10.0))
+cryptocurrencies.module.addPair(
+  new cryptocurrencies.module.Pair('USD/LTC', 20.0))
+cryptocurrencies.module.addPair(
+  new cryptocurrencies.module.Pair('USD/ETH', 30.0))
+
 console.log('Does USD/BTC exist in stock?')
 console.log(cryptocurrencies.module.pairExist('USD/BTC'))
 console.log('Does usd/btc (:)) exist in stock?')
