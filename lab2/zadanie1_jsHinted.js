@@ -42,6 +42,11 @@ cryptocurrencies.module = (function () {
         return elem.price === price;
       });
     },
+    findByName: function (name) {
+      return pairCollection.filter(function (elem) {
+        return elem.name === name;
+      });
+    },
     Pair: Pair
   }
 })();
@@ -60,7 +65,10 @@ console.log(cryptocurrencies.module.pairExist("usd/btc"));
 console.log("Does USD/ETH  exist in stock?");
 console.log(cryptocurrencies.module.pairExist("USD/ETH"));
 console.log("Search stock by price");
-console.log(cryptocurrencies.module.findByPrice(30.0));
+console.log("Found by price:" + cryptocurrencies.module.findByPrice(30.0));
+
+console.log("Found by name: " + cryptocurrencies.module.findByName("USD/LTC"))
+
 
 console.log("Print currently observed pair");
 cryptocurrencies.module.printPairs();
