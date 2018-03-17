@@ -42,7 +42,7 @@ cryptocurrencies.module = (function () {
         return elem.price === price;
       });
     },
-    Pair: Pair,
+    Pair: Pair
   }
 })();
 

@@ -2,6 +2,7 @@
 
     Moduł z interfejsem publicznym dla swojej dziedziny
     formatowanie: https://github.com/standard/standard
+    formatowanie zgodne z linterem w pliku z koncowka _jsHinted
  */
 
 var cryptocurrencies = {}
