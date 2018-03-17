@@ -14,3 +14,8 @@ Konteksty this:
 Obiektowość:
 * Hermetyzacja przy IIEF
 * Dziedzicenie
+
+
+
+Dziedziczenie:
+* \_\_proto\_\_ w klasie dziedziczacej wskazuje na pole "prototype" klasy bazowej
