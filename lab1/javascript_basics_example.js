@@ -1,4 +1,4 @@
-console.log('yolo boiz')
+
 
 var obj = {
   asd: 'asd'
