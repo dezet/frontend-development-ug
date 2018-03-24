@@ -18,15 +18,16 @@ Pair.prototype.toPrintable = function () {
   return this.name + '(' + this.price + ')'
 }
 
-function MarketablePair (name, price, marketFrom, marketTo) {
+function MarketablePair (name, price, marketFrom, marketTo, amount) {
   Pair.call(this, name, price)
   this.marketFrom = marketFrom
   this.marketTo   = marketTo
+  this.amount     = amount
 }
 
 MarketablePair.prototype = Object.create(Pair.prototype)
 
-MarketablePair.prototype.transferBeetwenMarkets = function () {
+MarketablePair.prototype.transferBetweenMarkets = function () {
   console.log('Transfering ' + this.toPrintable() + ' between ' +
     this.marketFrom +
     ' -> ' + this.marketTo)
@@ -61,7 +62,7 @@ aPair.print()
 
 var aMarketablePair = new MarketablePair('LTC/USD', 20, 'BitBay', 'Bitfinex')
 
-aMarketablePair.transferBeetwenMarkets()
+aMarketablePair.transferBetweenMarkets()
 
 var aTradeablePair = new TradeablePair('USD/BTC', 100000000000000000000)
 
