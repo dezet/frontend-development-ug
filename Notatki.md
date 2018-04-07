@@ -18,4 +18,4 @@ Obiektowość:
 
 
 Dziedziczenie:
-* \_\_proto\_\_ w klasie dziedziczacej wskazuje na pole "prototype" klasy bazowej
+* \_\_proto\_\_ w klasie dziedziczacej (dziecku) wskazuje na pole "prototype" klasy bazowej (rodzica)

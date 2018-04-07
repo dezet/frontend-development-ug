@@ -8,10 +8,10 @@
  - iterators + for ... of
  **/
 function sleep (ms) {
-  return new Promise(function (resolve) {
-    setTimeout(function () {
+  return new Promise(resolve => {
+    setTimeout(() => {
       resolve()
-    }, ms)
+    })
   })
 }
 
@@ -21,82 +21,125 @@ class Currency {
     this.price = price
   }
 
-  toPrintable () {
+  toString () {
     return `${this.name} (${this.price})`
   }
 
-  print () {
-    console.log(this.toPrintable())
+  log () {
+    console.log(this.toString())
   }
 }
 
-class Pair {
-  constructor (currency1, currency2) {
-    this.currencies = [currency1, currency2]
+class Wallet {
+  constructor (currency, amount, address) {
+    this.currency = currency
+    this.amount   = amount
+    this.address  = address
   }
 
-  print () {
-    this.currencies.forEach(curr => {
-      if (curr instanceof Currency)
-        curr.print()
-    })
+  toString () {
+    return `${this.currency.name} - amount: ${this.amount} - wallet address: ${this.address}`
   }
 
-  getFirstCurrency () {
-    return this.currencies[0]
-  }
-
-  getSecondCurrency () {
-    return this.currencies[1]
+  log () {
+    console.log(this.toString())
   }
 }
 
-class ArbitragablePair extends Pair {
-
-  constructor (currency1, currency2) {
-    super(currency1, currency2)
+class TransferExecutor {
+  execute () {
+    console.log(`Http request to the rest api completed.`)
   }
-
-  arbitrage (fromMarket, toMarket) {
-    const fee = 0.2
-
-  }
-
 }
 
-class TradablePair extends Pair {
-
-  constructor (soldCurrency, incomingCurrency) {
-    super(soldCurrency, incomingCurrency)
+class Transfer {
+  constructor (fromWallet, toWallet, currency, amount, transferExecutor) {
+    this.fromWallet       = fromWallet
+    this.toWallet         = toWallet
+    this.currency         = currency
+    this.amount           = amount
+    this.transferExecutor = transferExecutor
   }
 
-  calculateAmount (amount = null) {
-    if (amount === null) {
-      let secondCurrency = this.getSecondCurrency()
-      let firstCurrency  = this.getFirstCurrency()
-      return secondCurrency.price / firstCurrency.price
+  execute () {
+    if (this.fromWallet.amount >= this.amount) {
+      console.log(
+        `Transfering ${this.amount} of ${this.currency.name} from ${this.fromWallet.address} to ${this.toWallet.address}`)
+      this.transferExecutor.execute()
+      console.log(`Fee will cost: ${this.calculateFee()}`)
+      this.fromWallet.amount = this.fromWallet.amount - this.amount
+      this.toWallet.amount   = this.toWallet.amount + this.amount
     }
-    else return amount
+    else {
+      console.log(`Not enough funds on wallet ${this.fromWallet.address}`)
+    }
   }
 
-  sell (amount) {
-    console.log(
-      `Started preparing sell disposition of ${amount} 
-      ${this.getFirstCurrency().print()} into 
-      ${this.calculateAmount()} ${this.getSecondCurrency().print()}}`)
-    sleep(1000).then(() => {
-      console.log(`Disposition sent`)
-    })
-  }
-
-  buy (amount) {
-    console.log(
-      `Started preparing buy disposition of ${amount} 
-      ${this.getFirstCurrency().print()} for 
-      ${this.calculateAmount()} ${this.getSecondCurrency().print()}}`)
-    sleep(1000).then(() => {
-      console.log(`Disposition sent`)
-    })
+  calculateFee () {
+    const fee = 0.001
+    return this.amount * fee
   }
 }
 
+class User {
+  constructor (id, wallets = []) {
+    this.id      = id
+    this.wallets = wallets
+  }
+
+  addWallets (...wallet) {
+    this.wallets = this.wallets.concat(wallet)
+  }
+
+  printWallets () {
+    this.wallets.forEach(e => {
+      e.log()
+    })
+  }
+
+  getWallet (currency) {
+    console.log(this.wallets)
+    return this.wallets.find(w => w.currency.name = currency.name)
+  }
+}
+
+class Market {
+  constructor (...users) {
+    this.users = users
+  }
+
+  transaction (fromUser, toUser, currency, amount) {
+    let fromUserWallet = fromUser.getWallet(currency)
+    console.log(fromUserWallet)
+    let toUserWallet = toUser.getWallet(currency)
+    console.log(toUserWallet)
+    let transfer = new Transfer(fromUserWallet, toUserWallet, currency,
+      amount, new TransferExecutor())
+    transfer.execute()
+  }
+}
+
+let btc = new Currency('BTC', 6500.000)
+let ltc = new Currency('LTC', 200.000)
+let xtc = new Currency('XTC', 153.000)
+
+let walletBtc1 = new Wallet(btc, 100, '#123456')
+let walletLtc1 = new Wallet(ltc, 26, '#123457')
+let walletXtc1 = new Wallet(xtc, 2000, '#123458')
+
+let walletBtc2 = new Wallet(btc, 100, '#123222')
+let walletLtc2 = new Wallet(ltc, 26, '#123333')
+let walletXtc2 = new Wallet(xtc, 2000, '#123458')
+
+let user1 = new User(1)
+user1.addWallets(walletBtc1, walletLtc1)
+user1.printWallets()
+let user2 = new User(2)
+user2.addWallets(walletBtc2, walletLtc2)
+user2.printWallets()
+let marketA = new Market(user1, user2)
+
+marketA.transaction(user1, user2, btc, 10)
+
+user1.printWallets()
+user2.printWallets()
