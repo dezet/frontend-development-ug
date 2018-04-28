@@ -1,6 +1,6 @@
 "use strict";
 class Currency {
-    constructor(id, price, name, walletable) {
+    constructor(id, price, name) {
         this.id = id;
         this.price = price;
         this.name = name;
@@ -10,7 +10,7 @@ class Currency {
 }
 class BTC extends Currency {
     constructor(id, price, name = "BTC") {
-        super(id, price, name, true);
+        super(id, price, name);
         this.id = id;
         this.price = price;
         this.name = name;
@@ -18,7 +18,7 @@ class BTC extends Currency {
 }
 class XTC extends Currency {
     constructor(id, price, name = "XTC") {
-        super(id, price, name, false);
+        super(id, price, name);
         this.id = id;
         this.price = price;
         this.name = name;
@@ -26,7 +26,7 @@ class XTC extends Currency {
 }
 class ETH extends Currency {
     constructor(id, price, name = "ETH") {
-        super(id, price, name, false);
+        super(id, price, name);
         this.id = id;
         this.price = price;
         this.name = name;
@@ -40,6 +40,9 @@ class Wallet {
     }
     add(c) {
         this.currencies.push(c);
+    }
+    addAll(c) {
+        this.currencies = this.currencies.concat(c);
     }
     delete(c) {
         this.currencies = this.currencies.filter((e) => e.id != c.id);
@@ -72,3 +75,7 @@ wallet.print();
 myBtc.price = 0;
 wallet.update(myBtc);
 wallet.print();
+console.log('---');
+let wallet2 = new Wallet(1, []);
+wallet2.addAll([myBtc, myXtc]);
+wallet2.print();

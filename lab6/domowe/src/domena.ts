@@ -1,5 +1,5 @@
 class Currency {
-    constructor(public id: number, public price: number, public name: string, walletable?: boolean) {
+    constructor(public id: number, public price: number, public name: string) {
         this.price = price;
         this.name = name;
     }
@@ -7,25 +7,27 @@ class Currency {
 
 class BTC extends Currency {
     constructor(public id: number, public price: number, public name: string = "BTC") {
-        super(id, price, name, true)
+        super(id, price, name)
     }
 }
 
 class XTC extends Currency {
     constructor(public id: number, public price: number, public name: string = "XTC") {
-        super(id, price, name, false)
+        super(id, price, name)
     }
 }
 
 class ETH extends Currency {
     constructor(public id: number, public price: number, public name: string = "ETH") {
-        super(id, price, name, false)
+        super(id, price, name)
     }
 }
 
 
 interface IWallet {
     add(c: Currency): void
+
+    addAll(c: Currency[]): void
 
     delete(c: Currency): void
 
@@ -43,6 +45,10 @@ class Wallet implements IWallet {
 
     add(c: Currency): void {
         this.currencies.push(c);
+    }
+
+    addAll(c: Currency[]): void {
+        this.currencies = this.currencies.concat(c);
     }
 
     delete(c: Currency): void {
@@ -83,3 +89,7 @@ myBtc.price = 0;
 wallet.update(myBtc);
 wallet.print();
 
+console.log('---');
+let wallet2 = new Wallet(1, []);
+wallet2.addAll([myBtc, myXtc]);
+wallet2.print();
