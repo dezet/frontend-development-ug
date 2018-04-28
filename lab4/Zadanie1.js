@@ -82,9 +82,10 @@ class Transfer {
 }
 
 class User {
-  constructor (id, wallets = []) {
+  constructor (id, wallets = [], role = 'User') {
     this.id      = id
     this.wallets = wallets
+    this.role    = role
   }
 
   addWallets (...wallet) {
@@ -100,6 +101,12 @@ class User {
   getWallet (currency) {
     console.log(this.wallets)
     return this.wallets.find(w => w.currency.name = currency.name)
+  }
+}
+
+class Admin extends User {
+  constructor (id, wallets = []) {
+    super(id, wallets, 'Admin')
   }
 }
 

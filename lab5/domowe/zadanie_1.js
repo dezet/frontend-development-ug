@@ -1,15 +1,19 @@
-var q = $('#q')
+var q      = $('#q')
 var keyups = Rx.Observable.fromEvent(q, 'keyup')
 keyups.throttleTime(500).map(function (x) {
   return q.val()
 }).switchMap(function (x) {
   return searchWikipedia(x)
 }).switchMap(function (x) {
-  return Rx.Observable.zip(
-    Rx.Observable.from(x[1]),
-    Rx.Observable.from(x[2]),
-    Rx.Observable.from(x[3])
-  )
+  return Rx.Observable.
+            zip(
+              Rx.Observable.
+                 from(x[1]),
+              Rx.Observable.
+                 from(x[2]),
+              Rx.Observable.
+                 from(x[3])
+            )
 }).switchMap(function (row) {
   return Rx.Observable.of(createLink(row))
 }).subscribe(function (x) {
