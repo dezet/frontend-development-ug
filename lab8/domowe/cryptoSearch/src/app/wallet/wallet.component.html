@@ -1,0 +1,12 @@
+<h2>My crypto wallets</h2>
+<ul class="wallets">
+  <li *ngFor="let cryptocurrency of filteredWallet" (click)="onSelect(cryptocurrency)"
+      [class.selected]="cryptocurrency == selectedCurrency">
+    <span class="badge">{{cryptocurrency.id}}</span> {{cryptocurrency.name}}
+  </li>
+</ul>
+<app-wallet-search [cryptocurrencies]="wallet"
+                   (filteredCryptocurrencies)="onCryptocurrenciesFiltered($event)"></app-wallet-search>
+<app-wallet-details [cryptocurrency]="selectedCurrency"></app-wallet-details>
+
+

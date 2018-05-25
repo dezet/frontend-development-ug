@@ -1,0 +1,20 @@
+<div *ngIf="cryptocurrency">
+
+  <h2>{{ cryptocurrency.name | uppercase }} Details</h2>
+  <div (click)="informParent()"><span>id: </span>{{cryptocurrency.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="cryptocurrency.name" placeholder="name"/>
+    </label>
+    <label>wallet address:
+      <input [(ngModel)]="cryptocurrency.walletAddress" placeholder="name"/>
+    </label>
+    <label>price:
+      <input [(ngModel)]="cryptocurrency.price" placeholder="price"/>
+    </label>
+    <label>amount:
+      <input [(ngModel)]="cryptocurrency.amount" placeholder="name"/>
+    </label>
+  </div>
+
+</div>

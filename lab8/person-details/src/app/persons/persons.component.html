@@ -1,0 +1,11 @@
+<h2>My Persons</h2>
+<ul class="persons">
+  <li *ngFor="let person of filteredPersons" (click)="onSelect(person)">
+    <span class="badge">{{person.id}}</span> {{person.name}}
+  </li>
+</ul>
+
+
+<app-person-detail [person]="selectedPerson"></app-person-detail>
+
+<app-person-search [persons]="persons" (filteredPersons)="onFilteredPersons($event)"></app-person-search>
