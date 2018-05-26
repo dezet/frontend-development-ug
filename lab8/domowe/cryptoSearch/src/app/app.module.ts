@@ -5,6 +5,7 @@ import {WalletComponent} from './wallet/wallet.component';
 import {WalletDetailsComponent} from './wallet-details/wallet-details.component';
 import {WalletSearchComponent} from './wallet-search/wallet-search.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {CryptocurrencyService} from "./service/cryptocurrencyService";
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CryptocurrencyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
