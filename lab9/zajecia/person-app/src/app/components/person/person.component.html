@@ -1,0 +1,15 @@
+<ul>
+  <li *ngFor="let person of persons">
+    {{ person.name }} {{ person.birthDate }} {{ person.email }}
+  </li>
+</ul>
+
+
+<form [formGroup]="personForm" (ngSubmit)="mySubmit(myForm)">
+  <input type="text" [formControl]="personForm.controls['name']">
+  <input type="text" [formControl]="personForm.controls['birthDate']">
+  <input type="text" [formControl]="personForm.controls['email']">
+  <button type="submit">OK</button>
+</form>
+
+
