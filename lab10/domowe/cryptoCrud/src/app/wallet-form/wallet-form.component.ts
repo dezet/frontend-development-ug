@@ -35,15 +35,17 @@ export class WalletFormComponent implements OnInit {
       'walletAddress': this.fb.control('', Validators.compose([Validators.required, CustomValidators.addressValidator]))
     });
     const id = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.cryptocurrencyService.getCurrency(id).subscribe(currency => {
-      this.currencyForm.patchValue({
-        id: currency.id,
-        amount: currency.amount,
-        name: currency.name,
-        price: currency.price,
-        walletAddress: currency.walletAddress
-      });
-    })
+    if (!isNaN(id)) {
+      this.cryptocurrencyService.getCurrency(id).subscribe(currency => {
+        this.currencyForm.patchValue({
+          id: currency.id,
+          amount: currency.amount,
+          name: currency.name,
+          price: currency.price,
+          walletAddress: currency.walletAddress
+        });
+      })
+    }
 
   }
 

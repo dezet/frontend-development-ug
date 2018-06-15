@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {Currency} from "../models/currency";
 
@@ -8,7 +8,7 @@ import {Currency} from "../models/currency";
   templateUrl: './wallet-search.component.html',
   styleUrls: ['./wallet-search.component.css']
 })
-export class WalletSearchComponent implements OnInit {
+export class WalletSearchComponent implements OnInit, OnChanges {
 
   @Output() filteredCryptocurrencies = new EventEmitter<Currency[]>();
 
@@ -18,12 +18,6 @@ export class WalletSearchComponent implements OnInit {
 
   constructor() {
     this.searchControl = new FormControl();
-
-    this.searchControl.valueChanges.subscribe(
-      searchTerm => {
-        this.informParent(this.cryptocurrencies.filter(c => c.name.includes(searchTerm.toUpperCase())))
-      }
-    )
   }
 
   informParent(cryptocurrencies: Currency[]) {
@@ -31,6 +25,15 @@ export class WalletSearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchControl.valueChanges.subscribe(
+      searchTerm => {
+        this.informParent(this.cryptocurrencies.filter(c => c.name.toLocaleLowerCase().includes(searchTerm.toLowerCase())))
+      }
+    )
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.cryptocurrencies = changes.cryptocurrencies.currentValue;
   }
 
 }

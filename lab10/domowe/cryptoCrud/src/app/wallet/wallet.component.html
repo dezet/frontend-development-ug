@@ -3,7 +3,9 @@
     <div class="d-flex flex-column">
       <div>
         <h2>My crypto wallets</h2>
-        <div *ngFor="let currency of wallet" class="card border-dark mb-3" style="max-width: 18rem;">
+        <app-wallet-search [cryptocurrencies]="wallet"
+                           (filteredCryptocurrencies)="onCryptocurrenciesFiltered($event)"></app-wallet-search>
+        <div *ngFor="let currency of filteredWallet" class="card border-dark mb-3" style="max-width: 18rem;">
           <div class="card-header">{{currency.id}} waluta</div>
           <div class="card-body text-dark">
             <h5 class="card-title">

@@ -13,12 +13,13 @@ export class WalletDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private cryptocurrencyService: CryptocurrencyService) {
-
   }
 
   ngOnInit() {
     const id = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.cryptocurrencyService.getCurrency(id).subscribe(currency => this.currency = currency)
+    if (!isNaN(id)) {
+      this.cryptocurrencyService.getCurrency(id).subscribe(currency => this.currency = currency)
+    }
   }
 
 }
