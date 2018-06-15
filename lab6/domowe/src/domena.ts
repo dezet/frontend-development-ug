@@ -80,7 +80,6 @@ let myXtc = new XTC(2, 3000);
 let wallet = new Wallet(1, [myBtc, myXtc]);
 wallet.print();
 let myBtc2 = wallet.find(myBtc);
-console.log(myBtc2);
 wallet.add(new ETH(3, 200.32));
 wallet.print();
 wallet.delete(myXtc);

@@ -66,7 +66,7 @@ var counter = function () {
 var c = counter()
 
 // ZUPELNIE INNE WYNIKI!!!!
-console.log(counter()()) //currying?:)
+console.log(counter()()) 
 console.log(counter()())
 
 console.log(c())
