@@ -73,11 +73,8 @@ app.route('/currency/:id').
     delete((req, res) => {
       if (!isNaN(req.params.id)) {
         let idx = cryptocurrencies.findIndex(
-          c => c.id == req.params.id)
-        console.log(idx);
-        console.log(cryptocurrencies);
-        cryptocurrencies.splice(idx, 1)
-        console.log(cryptocurrencies);
+          c => c.id == req.params.id);
+        cryptocurrencies.splice(idx, 1);
         res.send({status: 200})
       }
       else res.sendStatus(404)

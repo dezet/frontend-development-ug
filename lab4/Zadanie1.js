@@ -117,9 +117,7 @@ class Market {
 
   transaction (fromUser, toUser, currency, amount) {
     let fromUserWallet = fromUser.getWallet(currency)
-    console.log(fromUserWallet)
     let toUserWallet = toUser.getWallet(currency)
-    console.log(toUserWallet)
     let transfer = new Transfer(fromUserWallet, toUserWallet, currency,
       amount, new TransferExecutor())
     transfer.execute()

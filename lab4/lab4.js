@@ -14,7 +14,6 @@ var aShape = {
   scale: 2,
   move () {
     console.log('aShape numbers: ')
-    console.log(this.numbers)
     var self     = this //!!!
     this.numbers = this.numbers.map(function (elem) {
       return elem * self.scale
