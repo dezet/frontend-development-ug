@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="d-flex justify-content-center align-items-center col-sm">
+    <div class="d-flex flex-column">
+      <h1>Dodawanie waluty</h1>
+      <form [formGroup]="currencyForm">
+        <div class="form-group">
+          <label>Nazwa waluty:</label>
+          <input type="text" [formControl]="currencyForm.controls['name']" class="form-control">
+
+          <div
+            *ngIf="currencyForm.controls['name'].invalid && (currencyForm.controls['name'].dirty || currencyForm.controls['name'].touched)"
+            class="alert alert-danger form-control">
+            <div *ngIf="currencyForm.controls['name'].errors.required">
+              Pole jest wymagane.
+            </div>
+            <div *ngIf="currencyForm.controls['name'].errors.minlength">
+              Nazwa musi mieć conajmniej 3 znaki.
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <label>Cena:</label>
+          <input type="text" [formControl]="currencyForm.controls['price']" class="form-control">
+
+          <div
+            *ngIf="currencyForm.controls['price'].invalid && (currencyForm.controls['price'].dirty || currencyForm.controls['price'].touched)"
+            class="alert alert-danger form-control">
+            <div *ngIf="currencyForm.controls['price'].errors.required">
+              Pole jest wymagane.
+            </div>
+            <div *ngIf="currencyForm.controls['price'].errors.number">
+              Musi być liczbą.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ilość</label>
+          <input type="text" [formControl]="currencyForm.controls['amount']" class="form-control">
+          <div
+            *ngIf="currencyForm.controls['amount'].invalid && (currencyForm.controls['amount'].dirty || currencyForm.controls['amount'].touched)"
+            class="alert alert-danger form-control">
+
+            <div *ngIf="currencyForm.controls['amount'].errors.required">
+              Pole jest wymagane.
+            </div>
+            <div *ngIf="currencyForm.controls['amount'].errors.number">
+              Musi być liczbą.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Adres portfela:</label>
+          <input type="text" [formControl]="currencyForm.controls['walletAddress']" class="form-control">
+          <div
+            *ngIf="currencyForm.controls['walletAddress'].invalid && (currencyForm.controls['walletAddress'].dirty || currencyForm.controls['walletAddress'].touched)"
+            class="alert alert-danger form-control">
+
+            <div *ngIf="currencyForm.controls['walletAddress'].errors.required">
+              Pole jest wymagane.
+            </div>
+            <div *ngIf="currencyForm.controls['walletAddress'].errors.address">
+              Nie poprawny adres portfela. Powinien być formatu XXX-XXX-XXX-XXX.
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" (click)="mySubmit(currencyForm)" [disabled]="!currencyForm.valid">
+          Submit
+        </button>
+        <button class="btn" (click)="resetForm()">Wyczyść</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

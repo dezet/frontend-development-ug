@@ -1,0 +1,9 @@
+{
+  "/person": {
+    "target": "http://localhost:3452/person",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/person" : ""}
+  }
+}

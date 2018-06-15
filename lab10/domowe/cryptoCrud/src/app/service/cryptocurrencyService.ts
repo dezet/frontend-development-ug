@@ -49,6 +49,14 @@ export class CryptocurrencyService {
     );
   }
 
+  getCurrency(id: number): Observable<Currency> {
+    let url = `${this.url}/${id}`;
+    return this.http.get<Currency>(url).pipe(
+      tap(_ => console.log(_)),
+      catchError(this.handleError<Currency>())
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error); // log to console instead

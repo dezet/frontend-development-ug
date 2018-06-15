@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="d-flex justify-content-center align-items-center col-sm">
+    <div class="d-flex flex-column">
+      <div>
+        <h2>My crypto wallets</h2>
+        <div *ngFor="let currency of wallet" class="card border-dark mb-3" style="max-width: 18rem;">
+          <div class="card-header">{{currency.id}} waluta</div>
+          <div class="card-body text-dark">
+            <h5 class="card-title">
+              <a routerLink="/kurrency/{{currency.id}}">
+                {{currency.name}}</a>
+            </h5>
+            <p class="card-text">
+
+            </p>
+          </div>
+          <div class="card-footer border-dark">
+            <a routerLink="/kurrency/edit/{{currency.id}}">
+              <button type="button" class="btn btn-success">
+                Edytuj
+              </button>
+            </a>
+            <button type="button" class="btn btn-danger">
+              Usuń
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

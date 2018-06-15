@@ -1,0 +1,45 @@
+<div *ngIf="currency">
+  <div class="list-group">
+    <div class="list-group-item list-group-item-action flex-row justify-content-start">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <p class="mb-1">Nazwa:</p>
+        </div>
+        <div>
+          <small>{{currency.name | uppercase}}</small>
+        </div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action flex-row justify-content-start">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <p class="mb-1">Cena:</p>
+        </div>
+        <div>
+          <small>{{currency.price}}</small>
+        </div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action flex-row justify-content-start">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <p class="mb-1">Ilość:</p>
+        </div>
+        <div>
+          <small>{{currency.amount }}</small>
+        </div>
+      </div>
+    </div>
+    <div class="list-group-item list-group-item-action flex-row justify-content-start">
+      <div class="d-flex w-100 justify-content-between">
+        <div>
+          <p class="mb-1">Adres portfela:</p>
+
+        </div>
+        <div>
+          <small>{{currency.walletAddress}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

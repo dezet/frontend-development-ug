@@ -1,0 +1,9 @@
+{
+  "/currency": {
+    "target": "http://localhost:3452/currency",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/currency" : ""}
+  }
+}
